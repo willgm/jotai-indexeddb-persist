@@ -1,0 +1,36 @@
+{
+  "name": "jotai-101",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "7.15.5",
+    "@babel/helper-module-imports": "7.15.4",
+    "@babel/template": "7.15.4",
+    "@babel/types": "7.15.6",
+    "@types/react": "17.0.21",
+    "@types/react-dom": "17.0.9",
+    "@urql/core": "2.3.1",
+    "babel-plugin-macros": "3.1.0",
+    "graphql": "15.5.3",
+    "idb-keyval": "3.1.0",
+    "immer": "9.0.6",
+    "jotai": "1.3.4",
+    "optics-ts": "2.2.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-query": "3.23.2",
+    "rxjs": "^7.3.0",
+    "valtio": "1.2.2",
+    "wonka": "4.0.15",
+    "xstate": "4.24.1"
+  },
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject"
+  },
+  "devDependencies": {
+    "react-scripts-ts": "latest"
+  }
+}
