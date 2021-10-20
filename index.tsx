@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import './style.css';
 
 import { get as getItem, set as setItem } from 'idb-keyval';
-import { useAtom, atom, WritableAtom, Provider, PrimitiveAtom } from 'jotai';
+import { useAtom, Provider } from 'jotai';
 import { useReducerAtom, atomWithStorage } from 'jotai/utils';
 
 function atomWithAsyncStorage<T>(key: string, initial: T) {
@@ -11,30 +11,6 @@ function atomWithAsyncStorage<T>(key: string, initial: T) {
     setItem,
     getItem: (key) => getItem<T>(key).then((value) => value ?? initial),
   });
-}
-
-function atomWithCustonAsyncStorage<T, U extends T | ((i?: T) => T)>(
-  initial: T | PrimitiveAtom<T>,
-  key: string
-): WritableAtom<T, U> {
-  const baseAtom = isPrimitiveAtom(initial) ? initial : atom<T>(initial);
-  baseAtom.onMount = (set) => {
-    getItem<T>(key).then((v) => v && set(v));
-  };
-  const derivedAtom = atom<T, U>(
-    (get) => get(baseAtom),
-    (get, set, update) => {
-      const nextValue =
-        typeof update === 'function' ? update(get(baseAtom)) : update;
-      set(baseAtom, nextValue);
-      setItem(key, nextValue);
-    }
-  );
-  return derivedAtom;
-}
-
-function isPrimitiveAtom(atom: any): atom is PrimitiveAtom<any> {
-  return atom.write !== undefined;
 }
 
 const countAtom = atomWithAsyncStorage('count', 0);
